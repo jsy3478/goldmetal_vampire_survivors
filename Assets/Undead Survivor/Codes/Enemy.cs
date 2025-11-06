@@ -244,13 +244,13 @@ public class Enemy : MonoBehaviour
         isKnockedBack = true;
 
         // 2. Rigidbody의 속도(velocity)에 넉백 방향*힘을 순간적으로 적용합니다.
-        rigid.velocity = knockbackDir * power;
+        rigid.linearVelocity = knockbackDir * power;
 
         // 3. 지정된 넉백 시간(duration)만큼 '여기서 대기'합니다.
         yield return new WaitForSeconds(duration);
 
         // 4. 넉백 시간이 끝나면 속도를 0으로 초기화합니다.
-        rigid.velocity = Vector2.zero;
+        rigid.linearVelocity = Vector2.zero;
 
         // 5. 넉백 상태를 해제합니다. (-> AI 로직이 다시 정상 작동 시작)
         isKnockedBack = false;
