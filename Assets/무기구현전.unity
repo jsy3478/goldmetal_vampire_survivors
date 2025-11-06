@@ -982,8 +982,6 @@ MonoBehaviour:
   currentHealth: 0
   isDead: 0
   dropItemIndex: -1
-  knockbackPower: 4
-  knockbackDuration: 0.2
   knockbackPower: 0
   knockbackDuration: 0
   onDie:
@@ -1048,7 +1046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllySpawner
   allyPrefabIndex: 2
-  spawnInterval: 5
+  spawnInterval: 2
   spawnRadius: 2
 --- !u!1 &1213042079
 GameObject:
