@@ -10,8 +10,10 @@ public class Enemy : MonoBehaviour
 {
     [Header("기본 능력치")]
     /// <summary>적의 이동 속도</summary>
-    public float speed = 2.5f; // 적의 이동 속도 (골드메탈 튜토리얼 변수)
-
+    public float speed = 2.5f; // 적의 이동 속도 (골드메탈 튜토리얼 변수
+    public float health;
+    public float maxHealth;
+    public RuntimeAnimatorController[] animCon;
     [Header("AI 설정")]
     /// <summary>공격할 대상의 레이어 (인스펙터에서 'Ally'로 설정해야 함)</summary>
     public LayerMask targetLayer;
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
     // ★★★ [신규] 넉백 상태 변수 ★★★
     /// <summary>현재 넉백 상태인지 여부. true이면 AI 이동/공격/타겟팅이 모두 중지됩니다.</summary>
     private bool isKnockedBack = false;
-
+    Animator anim;
     /// <summary>
     /// [Unity 이벤트] Awake() - 스크립트가 처음 로드될 때 1회 호출
     /// </summary>
@@ -50,6 +52,7 @@ public class Enemy : MonoBehaviour
         // 컴포넌트 캐싱(Caching)
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -254,5 +257,14 @@ public class Enemy : MonoBehaviour
 
         // 5. 넉백 상태를 해제합니다. (-> AI 로직이 다시 정상 작동 시작)
         isKnockedBack = false;
+    }
+    public void init(SpawnData data)
+    {
+        anim.runtimeAnimatorController = animCon[data.spriteType];
+        speed = data.speed;
+        maxHealth = data.health;
+        health = data.health;
+
+        // 
     }
 }
